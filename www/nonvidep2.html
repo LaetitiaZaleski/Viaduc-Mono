@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Noyau Non Vide</title>
+    <!-- INCLUDE DES LIBS (BOOTSTRAP + AUTRES)-->
+    <script type="text/javascript" src="sources/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="sources/lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="sources/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
+
+    <script type="text/javascript" src="sources/lib/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <link rel="stylesheet" href="sources/lib/bootstrap-slider/bootstrap-slider.min.css">
+
+    <!-- INCLUDE DES STYLES ET SCRIPT DE LA PAGE -->
+
+    <link rel="stylesheet" href="sources/styles/default.css">
+    <link rel="stylesheet" href="sources/styles/preference.css">
+    <link rel="stylesheet" href="sources/styles/home2.css">
+    <link rel="stylesheet" href="sources/styles/result.css">
+
+    <script type="text/javascript" src="sources/js/tools.js"></script>
+    <script type="text/javascript" src="sources/js/nonvide2.js"></script>
+    <script type="text/javascript" src="sources/js/nonvide.js"></script>
+</head>
+<body>
+
+<div style="text-align: center;">
+
+    <span>
+        Nous allons maintenant estimer l'importance des différents paramètres. Modifier les sliders jusqu'à ce que les pas
+        appliquées sur tous les paramètres vous semblent équivalentes.
+    </span>
+
+</div>
+
+
+<div>
+    <ul id="liste-tres-important"></ul>
+    <ul id="liste-important"></ul>
+</div>
+
+<span>
+        Quand vous êtes satisfaits, appuyer sur le bouton ci-dessous, le calcul peut prendre une dixaine de minutes.
+</span>
+
+<div style="padding: 50px">
+    <button id="draw" onclick="getPrefs()" class="btn btn-primary"> Proposer des noyaux non vides </button>
+    <br/>
+</div>
+
+<div id="kernelDiv" style="width:100%;height:100%"></div>
+
+</div>
+</body>
+</html>

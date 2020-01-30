@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Preference</title>
+
+    <!-- INCLUDE DES LIBS (BOOTSTRAP + AUTRES)-->
+    <script type="text/javascript" src="sources/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript" src="sources/lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="sources/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
+
+    <script type="text/javascript" src="sources/lib/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <link rel="stylesheet" href="sources/lib/bootstrap-slider/bootstrap-slider.min.css">
+
+    <script type="text/javascript" src="sources/lib/bootstrap-slider/nouislider.min.js"></script>
+    <link rel="stylesheet" href="sources/lib/bootstrap-slider/nouislider.min.css">
+
+    <script  type="text/javascript" src="sources/lib/math/math.min.js"></script>
+    <script type="text/javascript" src="sources/lib/d3/d3.min.js"></script>
+    <script type="text/javascript"  src="sources/lib/plotly/plotly-latest.min.js"></script>
+
+    <!-- INCLUDE DES STYLES ET SCRIPT DE LA PAGE -->
+
+    <link rel="stylesheet" href="sources/styles/default.css">
+    <link rel="stylesheet" href="sources/styles/preference.css">
+    <link rel="stylesheet" href="sources/styles/home2.css">
+
+    <script type="text/javascript" src="sources/js/tools.js"></script>
+    <script type="text/javascript" src="sources/js/getFile.js"></script>
+    <script type="text/javascript" src="sources/js/slideshow.js"></script>
+</head>
+<body>
+
+<div class="txt-center">
+    <h1>
+        Préférences :
+    </h1>
+
+
+    <div class="preference-container">
+        <div class="">
+
+            <div>
+                <h2>
+                    Choix des objectifs :
+                </h2>
+                <h4 id="tortues" onmouseenter="$(this).popover('show')" onmouseleave="$(this).popover('hide')" data-toggle="popover" title="{{.ValueAniMin}},{{.ValueAniMax}}" data-content="<div>{{.ValueAniRole1}}</div><div>{{.ValueAniRole2}}</div>">
+                    <div>
+                        <span> Nombres d'animaux : </span> <span id="valueAniSliderVal1" class="orange"></span> - <span id="valueAniSliderVal2" class="vert" ></span> - <span id="valueAniSliderVal3" class="vert"></span> - <span id="valueAniSliderVal4" class="orange"></span>
+                    </div>
+                    <div id="slider-ani" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+                    <div>
+
+                    </div>
+                </h4>
+
+                <h4 id="capital" onmouseenter="$(this).popover('show')" onmouseleave="$(this).popover('hide')" data-toggle="popover" title="{{.ValueCapMin}},{{.ValueCapMax}}" data-content="<div>{{.ValueCapRole1}}</div><div>{{.ValueCapRole2}}</div>">
+                    <div>
+                        <span> Capital des infrastructures de pêche : </span> <span id="valueCapSliderVal1" class="orange"> </span> - <span id="valueCapSliderVal2" class="vert" ></span> - <span id="valueCapSliderVal3" class="vert"></span> - <span id="valueCapSliderVal4" class="orange"></span>
+                    </div>
+                    <div>
+                        <div id="slider-cap" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+                    </div>
+
+                </h4>
+
+                <h4 id="touristes" onmouseenter="$(this).popover('show')" onmouseleave="$(this).popover('hide')" data-toggle="popover" title="{{.ValueTourMin}},{{.ValueTourMax}}" data-content="<div>{{.ValueTourRole1}}</div><div>{{.ValueTourRole2}}</div>">
+                    <div>
+                        <span> Nombre de touristes : </span> <span id="valueTourSliderVal1" class="orange"></span> - <span id="valueTourSliderVal2" class="vert" ></span> - <span id="valueTourSliderVal3" class="vert"></span> - <span id="valueTourSliderVal4" class="orange"></span>
+                    </div>
+                    <div>
+                        <div id="slider-tour" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+                    </div>
+
+                </h4>
+            </div>
+
+            <h2>
+                -
+            </h2>
+
+
+            <div>
+                <h2>
+                    Choix des moyens d'actions :
+                </h2>
+                <h4 id="environnement"  onmouseenter="$(this).popover('show')" onmouseleave="$(this).popover('hide')" data-toggle="popover" title="{{.ValueEnvMin}},{{.ValueEnvMax}}" data-content="<div>{{.ValueEnvRole1}}</div><div>{{.ValueEnvRole2}}</div>">
+                    <div>
+                        <span> Restauration de l'environnement : </span> <span id="valueEnvSliderVal1" class="orange"></span> - <span id="valueEnvSliderVal2" class="vert" ></span> - <span id="valueEnvSliderVal3" class="vert"></span> - <span id="valueEnvSliderVal4" class="orange"></span>
+                    </div>
+                    <div>
+                        <div id="slider-env" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+                    </div>
+
+
+                </h4>
+
+                <h4 id="ouvert"  onmouseenter="$(this).popover('show')" onmouseleave="$(this).popover('hide')" data-toggle="popover" title="{{.ValueOuvMin}},{{.ValueOuvMax}}" data-content="<div>{{.ValueOuvRole1}}</div><div>{{.ValueOuvRole2}}</div>">
+                    <div>
+                        <span> Proportion de l'aire protégée fermée au tourisme :</span> <span id="valueOuvSliderVal1" class="orange"></span> - <span id="valueOuvSliderVal2" class="vert" ></span> - <span id="valueOuvSliderVal3" class="vert"></span> - <span id="valueOuvSliderVal4" class="orange"></span>
+                    </div>
+                    <div>
+                        <div id="slider-ouv" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+                    </div>
+
+
+                </h4>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="slideshow-container">
+
+            <span> Nous allons à présent calculer le noyau de viabilité : c’est à dire que nous allons regarder si vos objectifs
+                par rapport au nombre de tortues,
+                de touristes et des l’infrastructures de pêche sont cohérents avec les moyens que vous vous donner pour y arriver.
+                Appuyer sur les flèches droite et gauche pour faire défiler les explications.
+            </span>
+
+             <div class="mySlides">
+
+                 <img src="sources/img/noyau1.png" width="700px">
+             </div>
+
+
+
+             <div class="mySlides" id="hideSlides">
+
+                 <img src="sources/img/noyau2.png" width="700px">
+
+             </div>
+
+
+
+             <div class="mySlides" id="hideSlides">
+
+                 <img src="sources/img/noyau3.png" width="700px">
+
+             </div>
+
+
+             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+             <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+         </div>
+
+        <br>
+
+
+
+    </div>
+
+    </div>
+
+<div>
+                <span> Les noyaux et les préférences seront affichés en bas de page.
+        Dans la légende à droite vous pourrez voir les noms des différents noyaux que vous calculer.
+        Les noms se lisent ainsi : Le premier mot est votre rôle, puis "A" et deux nombres correspondant aux limites inférieures
+    et suppérieures sur le nombre d'animaux, puis "C" et les limites sur le capital des infrastructures, puis T et les limites sur les touristes
+    ,puis "Env" et les limites sur la restauration de l'environnement, et enfin "Ouv" et les limites sur l'ouverture du parc.   </span>
+    <span> Pour faire disparaitre un noyaux, cliquez sur son nom. Pour isoler un noyau double cliquer sur son nom. </span>
+</div>
+
+
+
+
+    <div style="padding: 50px">
+        <button id="draw" onclick="getFile(true)" class="btn btn-primary"> Calculer et afficher le noyau </button>
+        <button id="help" onclick="letsNotEmpty()" class="btn btn-primary" hidden="true" > Aide pour trouver un noyau non-vide </button>
+        <br/>
+    </div>
+
+    <div id="kernelDiv" style="width:100%;height:100%"></div>
+
+</div>
+
+
+<script type="text/javascript" src="sources/js/preference.js"></script>
+<script type="text/javascript" src="sources/js/home.js"></script>
+
+<script>
+    localStorage.setItem("roomName",{{.RoomName}});
+    localStorage.setItem("classId",{{.ClassId}});
+</script>
+
+<script>
+
+    var sliderAni = document.getElementById('slider-ani');
+
+    noUiSlider.create(sliderAni, {
+        start: [{{.ValueAniFauxMin}}, {{.ValueAniMin}}, {{.ValueAniMax}}, {{.ValueAniFauxMax}}],
+        connect: [true, true, true, true, true],
+        step: 20,
+        range: {
+            'min': [0],
+            'max': [40000]
+        }
+    });
+
+    var connect = sliderAni.querySelectorAll('.noUi-connect');
+    var classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color', 'c-5-color'];
+
+    for (var i = 0; i < connect.length; i++) {
+        connect[i].classList.add(classes[i]);
+    }
+
+    var sliderAniValues1 = document.getElementById('valueAniSliderVal1');
+    var sliderAniValues2 = document.getElementById('valueAniSliderVal2');
+    var sliderAniValues3 = document.getElementById('valueAniSliderVal3');
+    var sliderAniValues4 = document.getElementById('valueAniSliderVal4');
+
+
+    sliderAni.noUiSlider.on('update', function (values) {
+        sliderAniValues1.innerHTML = values[0];
+        sliderAniValues2.innerHTML = values[1];
+        sliderAniValues3.innerHTML = values[2];
+        sliderAniValues4.innerHTML = values[3];
+    });
+
+
+    var sliderCap = document.getElementById('slider-cap');
+
+    noUiSlider.create(sliderCap, {
+        start: [{{.ValueCapFauxMin}}, {{.ValueCapMin}}, {{.ValueCapMax}}, {{.ValueCapFauxMax}}],
+        connect: [true, true, true, true, true],
+        step: 20,
+        range: {
+            'min': [0],
+            'max': [40000]
+        }
+    });
+
+    connect = sliderCap.querySelectorAll('.noUi-connect');
+
+    for (var i = 0; i < connect.length; i++) {
+        connect[i].classList.add(classes[i]);
+    }
+
+    var sliderCapValues1 = document.getElementById('valueCapSliderVal1');
+    var sliderCapValues2 = document.getElementById('valueCapSliderVal2');
+    var sliderCapValues3 = document.getElementById('valueCapSliderVal3');
+    var sliderCapValues4 = document.getElementById('valueCapSliderVal4');
+
+
+    sliderCap.noUiSlider.on('update', function (values) {
+        sliderCapValues1.innerHTML = values[0];
+        sliderCapValues2.innerHTML = values[1];
+        sliderCapValues3.innerHTML = values[2];
+        sliderCapValues4.innerHTML = values[3];
+    });
+
+    var sliderTour = document.getElementById('slider-tour');
+
+    noUiSlider.create(sliderTour, {
+        start: [{{.ValueTourFauxMin}}, {{.ValueTourMin}}, {{.ValueTourMax}}, {{.ValueTourFauxMax}}],
+        connect: [true, true, true, true, true],
+        step: 20,
+        range: {
+            'min': [0],
+            'max': [40000]
+        }
+    });
+
+    connect = sliderTour.querySelectorAll('.noUi-connect');
+
+    for (var i = 0; i < connect.length; i++) {
+        connect[i].classList.add(classes[i]);
+    }
+
+    var sliderTourValues1 = document.getElementById('valueTourSliderVal1');
+    var sliderTourValues2 = document.getElementById('valueTourSliderVal2');
+    var sliderTourValues3 = document.getElementById('valueTourSliderVal3');
+    var sliderTourValues4 = document.getElementById('valueTourSliderVal4');
+
+
+    sliderTour.noUiSlider.on('update', function (values) {
+        sliderTourValues1.innerHTML = values[0];
+        sliderTourValues2.innerHTML = values[1];
+        sliderTourValues3.innerHTML = values[2];
+        sliderTourValues4.innerHTML = values[3];
+    });
+
+
+
+    var sliderEnv = document.getElementById('slider-env');
+
+    noUiSlider.create(sliderEnv, {
+        start: [{{.ValueEnvFauxMin}}, {{.ValueEnvMin}}, {{.ValueEnvMax}}, {{.ValueEnvFauxMax}}],
+        connect: [true, true, true, true, true],
+        step: 5,
+        range: {
+            'min': [0],
+            'max': [100]
+        }
+    });
+
+    connect = sliderEnv.querySelectorAll('.noUi-connect');
+
+    for (var i = 0; i < connect.length; i++) {
+        connect[i].classList.add(classes[i]);
+    }
+
+    var sliderEnvValues1 = document.getElementById('valueEnvSliderVal1');
+    var sliderEnvValues2 = document.getElementById('valueEnvSliderVal2');
+    var sliderEnvValues3 = document.getElementById('valueEnvSliderVal3');
+    var sliderEnvValues4 = document.getElementById('valueEnvSliderVal4');
+
+
+    sliderEnv.noUiSlider.on('update', function (values) {
+        sliderEnvValues1.innerHTML = values[0];
+        sliderEnvValues2.innerHTML = values[1];
+        sliderEnvValues3.innerHTML = values[2];
+        sliderEnvValues4.innerHTML = values[3];
+    });
+
+
+    var sliderOuv = document.getElementById('slider-ouv');
+
+    noUiSlider.create(sliderOuv, {
+        start: [{{.ValueOuvFauxMin}}, {{.ValueOuvMin}}, {{.ValueOuvMax}}, {{.ValueOuvFauxMax}}],
+        connect: [true, true, true, true, true],
+        step: 5,
+        range: {
+            'min': [0],
+            'max': [50]
+        }
+    });
+
+    connect = sliderOuv.querySelectorAll('.noUi-connect');
+
+    for (var i = 0; i < connect.length; i++) {
+        connect[i].classList.add(classes[i]);
+    }
+
+    var sliderOuvValues1 = document.getElementById('valueOuvSliderVal1');
+    var sliderOuvValues2 = document.getElementById('valueOuvSliderVal2');
+    var sliderOuvValues3 = document.getElementById('valueOuvSliderVal3');
+    var sliderOuvValues4 = document.getElementById('valueOuvSliderVal4');
+
+
+    sliderOuv.noUiSlider.on('update', function (values) {
+        sliderOuvValues1.innerHTML = values[0];
+        sliderOuvValues2.innerHTML = values[1];
+        sliderOuvValues3.innerHTML = values[2];
+        sliderOuvValues4.innerHTML = values[3];
+    });
+
+
+</script>
+
+</body>
+
+
+</html>

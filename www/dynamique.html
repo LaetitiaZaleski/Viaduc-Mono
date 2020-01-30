@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamique</title>
+    <!-- INCLUDE DES LIBS (BOOTSTRAP + AUTRES)-->
+    <script type="text/javascript" src="sources/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript" src="sources/lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="sources/lib/bootstrap-4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="sources/lib/bootstrap-4.3.1/css/bootstrap-reboot.min.css">
+
+    <script type="text/javascript" src="sources/lib/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <link rel="stylesheet" href="sources/lib/bootstrap-slider/bootstrap-slider.min.css">
+
+    <script  type="text/javascript" src="sources/lib/math/math.min.js"></script>
+    <script type="text/javascript" src="sources/lib/d3/d3.min.js"></script>
+
+
+    <!-- INCLUDE DES STYLES ET SCRIPT DE LA PAGE -->
+
+    <link rel="stylesheet" href="sources/styles/default.css">
+    <link rel="stylesheet" href="sources/styles/dynamique.css">
+    <link rel="stylesheet" href="sources/styles/home2.css">
+
+
+    <meta charset="UTF-8">
+    <title>Dynamique</title>
+
+    <script type="text/javascript">
+        var infos = new Array();
+        infos[1]= "<span style='color:#1c6c06;font:italic 14px arial'>En économie, une dépréciation est une perte de valeur d'un bien. Ici il s'agit de la perte de la valeurs des infrastructures de pêches (bateaux, filets, local,...). Chaque année la valeur de ces bien est dimunée d'un certain pourcentga à definir ici.<\/span>";
+        infos[2]= "<span style='color:#1c6c06;font:italic 14px arial'>Avec ce paramètre vous pouvez moduler l'attraction des touristes pour les infrastructures de pêche, c'est à dire si les infrastructures des pêcheurs (bateaux, services proposés, temps d'attente,...) jouent un rôle important ou non dans la venue des touristes. <\/span>";
+        infos[3]= "<span style='color:#1c6c06;font:italic 14px arial'>En moyenne pour les poissons pêchés dans cette région. <\/span>";
+        infos[4]= "<span style='color:#1c6c06;font:italic 14px arial'>Il s'agit de la différence entre le nombre de tortues un à un moment donné et le nombre de tortues un an avant, sans compter l'influence des pêcheurs et touristes.<\/span>";
+
+        function afficher(msg){
+            document.getElementById('info').style.display = "block";
+            document.getElementById('info').innerHTML = msg;
+        }
+        function masquer(){
+            document.getElementById('info').style.display = "none";
+        }
+    </script>
+
+</head>
+<body>
+
+<div class="txt-center">
+    <h1>
+        Informations sur la dynamique et choix des paramètres :
+    </h1>
+
+    <h4>
+       Pour plus d'informations sur un paramètre, passer la souris sur le texte correspondant.
+    </h4>
+
+
+    <div class="dynamique-container">
+        <h4 class="">
+            <div>
+                <div>
+
+                    <span data-toggle="tooltip" data-placement="top" title="En économie, une dépréciation est une perte de valeur d'un bien. Ici il s'agit de la perte de la valeur des infrastructures de pêche (bateaux, filets, locaux,...). Chaque année la valeur de ces biens est dimunée d'un certain pourcentage, à definir ici.">Dépreciation des infrastructures de pêche (en % sur 10 ans) : </span>
+                    <span> {{.ValuePeche}} </span>
+                </div>
+                <div class="slidecontainer">
+                    <input id="valuePeche" class="custom-range" type="range" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="{{.ValuePeche}}" onchange="setMyValue(this);calc();"/>
+                    {{/*                    <input type="range" min="1" max="100" value="{{.ValuePeche}}" class="slider" id="valuePeche"
+                           onchange="setMyValue(this);calc();">*/}}
+                </div>
+            </div>
+
+            <div id="tortues">
+                <div>
+
+                    <span data-toggle="tooltip" data-placement="top" title="Avec ce paramètre vous pouvez moduler l'attraction des touristes pour les tortues, c'est à dire si la présence de tortues jouent un rôle important ou non dans la venue des touristes."> Attraction des touristes pour les tortues (de 0 à 100): </span>
+                    <span> {{.ValueTortue}} </span>
+                </div>
+                <div class="slidecontainer">
+                    <input id="valueTortue" class="custom-range" type="range" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="{{.ValueTortue}}" onchange="setMyValue(this);calc();"/>
+                    {{/*<input type="range" min="1" max="100" value="{{.ValueTortue}}" class="slider" id="valueTortue"
+                           onchange="setMyValue(this);calc();">*/}}
+                </div>
+            </div>
+
+            <div id="poisson">
+                <div>
+                    <span data-toggle="tooltip" data-placement="top" title="En moyenne pour les poissons pêchés dans cette région."> Prix pour 10 kilos de poisson (en dollard $) : </span>
+                    <span> {{.ValuePoisson}} </span>
+                </div>
+                <div class="slidecontainer">
+                    <input id="valuePoisson" class="custom-range" type="range" type="text" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="{{.ValuePoisson}}" onchange="setMyValue(this);calc();"/>
+                    {{/*<input type="range" min="1" max="100" value="{{.ValuePoisson}}" class="slider" id="valuePoisson"
+                           onchange="setMyValue(this);calc();">*/}}
+                </div>
+            </div>
+
+            <div id="repro">
+                <div >
+                    <span data-toggle="tooltip" data-placement="top" title="Il s'agit de la différence entre le nombre de tortues à un moment donné et le nombre de tortues un an avant, lorsque l'on imagine que l'influence des pêcheurs et des touristes est nulle."> Taux de reproduction des tortues : </span>
+                    <span> {{.ValueRepro}} </span>
+                </div>
+                <div class="slidecontainer">
+                    <input id="valueRepro" class="custom-range" type="range" type="text" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="{{.ValueRepro}}" onchange="setMyValue(this);calc();"/>
+                    {{/*<input type="range" min="1" max="100" value="{{.ValueRepro}}" class="slider" id="valueRepro"
+                           onchange="setMyValue(this);calc();">*/}}
+                </div>
+            </div>
+            <div style="padding: 50px">
+                <button id="start" onclick="document.location.reload(true)" class="btn btn-primary"> Réinitialiser les paramètres </button>
+                <br/>
+            </div>
+
+
+
+
+            <div id="graph">
+
+            </div>
+
+            <div>
+                <div>
+                    <span> Point de départ : </span>
+                </div>
+                <div>
+                   <div>
+                       <span> Nombre d'animaux : </span>
+                       <span> 10000</span>
+                   </div>
+                    <div class="slidecontainer">
+                        <input id="valueAni" class="custom-range" type="range" type="text" min="0" max="40000" step="100" value="10000" onchange="setMyValue(this);calc();"/>
+                        {{/*<input type="range" min="1" max="100" value="{{.ValuePoisson}}" class="slider" id="valuePoisson"
+                           onchange="setMyValue(this);calc();">*/}}
+                    </div>
+
+                </div>
+                <div>
+                    <div>
+                        <span> Capital des Pêcheurs : </span>
+                        <span> 10000</span>
+                    </div>
+                <div class="slidecontainer">
+                    <input id="valueCap" class="custom-range" type="range" type="text" min="0" max="40000" step="100" value="10000" onchange="setMyValue(this);calc();"/>
+                    {{/*<input type="range" min="1" max="100" value="{{.ValuePoisson}}" class="slider" id="valuePoisson"
+                           onchange="setMyValue(this);calc();">*/}}
+                </div>
+                </div>
+                <div>
+                    <div>
+                        <span> Nombre de touristes : </span>
+                        <span>10000 </span>
+                    </div>
+                <div class="slidecontainer">
+                    <input id="valueTour" class="custom-range" type="range" type="text" min="0" max="40000" step="100" value="10000" onchange="setMyValue(this);calc();"/>
+                    {{/*<input type="range" min="1" max="100" value="{{.ValuePoisson}}" class="slider" id="valuePoisson"
+                           onchange="setMyValue(this);calc();">*/}}
+                </div>
+            </div>
+
+
+</div>
+                </h4>
+
+        <div><img src="sources/img/dynamique.png" class="img-dyna-size" ></div>
+
+    </div>
+
+    <div style="padding: 50px">
+        <button id="start" onclick="setSettings()" class="btn btn-primary"> Continuer </button>
+        <br/>
+    </div>
+</div>
+
+<script>
+    localStorage.setItem("roomName",{{.RoomName}});
+    localStorage.setItem("classId",{{.ClassId}});
+</script>
+
+<script type="text/javascript" src="sources/js/tools.js"></script>
+<script type="text/javascript" src="sources/js/slider.js"></script>
+<script type="text/javascript" src="sources/js/home2.js"></script>
+<script type="text/javascript" src="sources/js/hover.js"></script>
+<script type="text/javascript" src="sources/js/settings.js"></script>
+</body>
+</html>

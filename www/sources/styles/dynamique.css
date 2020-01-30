@@ -1,0 +1,55 @@
+* {
+    box-sizing:border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Verdana";
+
+}
+
+.img-dyna-size {
+    width: 700px;
+}
+
+@media screen and (max-width: 1200px) {
+    .img-dyna-size {
+        width: 400px;
+    }
+}
+
+
+
+.dynamique-container {
+    display: flex;
+    padding: 20px;
+}
+
+.dynamique-container > div {
+    margin: auto;
+}
+
+.dynamique-container > div:first-child {
+    width: 45%;
+    margin-right: 0px;
+    padding: 10px;
+    padding-right: 20px;
+}
+
+.dynamique-container > div:last-child {
+    width: 45%;
+    margin-left: 0px;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+
+
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+.txt-center {
+    text-align: center;
+}
